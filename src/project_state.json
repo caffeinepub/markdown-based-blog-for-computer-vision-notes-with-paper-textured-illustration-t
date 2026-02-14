@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Build a blog for computer vision notes with Markdown support and a gentle, paper-textured illustration visual style.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Seamless warm paper texture background with subtle grain and light speckles (paper-texture.dim_2048x2048.png)\n- Gentle hand-drawn header illustration related to studying/notes/computer vision (e.g., sketchy notebook + simple camera/diagram motifs), minimal and warm (header-illustration.dim_1600x400.png)\n- Small hand-drawn icon set: notebook, tag, search (three icons in one transparent PNG sprite or separate files) (cv-notes-icons.dim_384x128.png)",
+  "existing_features": [
+    {
+      "id": "feature-create-a-public-blog-ui-to-present-computer-vision-notes-with-a-home-page-listing-posts-and-a-post-detail-page-for-reading-a-single-note",
+      "title": "Create a public blog UI to present computer vision notes with a home page listing posts and a post detail page for reading a single note.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-markdown-support-for-blog-content-by-loading-posts-from-markdown-files-stored-as-static-assets-and-render-markdown-headings-lists-code-blocks-links-images-safely-in-the-post-detail-page",
+      "title": "Add Markdown support for blog content by loading posts from Markdown files stored as static assets, and render Markdown (headings, lists, code blocks, links, images) safely in the post detail page.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-requested-visual-theme-consistently-across-all-pages-a-gentle-paper-textured-illustration-style-soft-warm-palette-subtle-grain-paper-texture-background-hand-drawn-accents-including-typography-and-spacing-that-feel-like-reading-notes",
+      "title": "Implement the requested visual theme consistently across all pages: a gentle, paper-textured illustration style (soft warm palette, subtle grain/paper texture background, hand-drawn accents), including typography and spacing that feel like reading notes.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-basic-blog-ergonomics-a-header-with-the-blog-title-optional-short-tagline-and-a-simple-client-side-filter-search-on-the-post-list-page-by-title-metadata-to-help-find-notes",
+      "title": "Add basic blog ergonomics: a header with the blog title, optional short tagline, and a simple client-side filter/search on the post list page (by title/metadata) to help find notes.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-the-required-generated-images-as-static-assets-and-use-them-in-the-ui-background-texture-and-a-small-hand-drawn-header-illustration-without-routing-image-delivery-through-the-backend",
+      "title": "Add the required generated images as static assets and use them in the UI (background texture and a small hand-drawn header illustration) without routing image delivery through the backend.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create a blog to publish computer vision notes",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Support Markdown files as the content source/format for posts",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Apply a gentle, paper-textured illustration visual style/theme",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Markdown-based blog for computer vision notes with paper-textured illustration theme",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

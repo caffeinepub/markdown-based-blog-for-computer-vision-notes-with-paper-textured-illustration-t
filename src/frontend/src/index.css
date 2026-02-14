@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.5rem;
+        
+        /* Warm paper-inspired palette */
+        --background: 0.97 0.015 60;
+        --foreground: 0.25 0.02 40;
+        --card: 0.98 0.01 55;
+        --card-foreground: 0.25 0.02 40;
+        --popover: 0.98 0.01 55;
+        --popover-foreground: 0.25 0.02 40;
+        --primary: 0.45 0.12 35;
+        --primary-foreground: 0.98 0.01 55;
+        --secondary: 0.88 0.025 50;
+        --secondary-foreground: 0.30 0.03 35;
+        --muted: 0.92 0.02 50;
+        --muted-foreground: 0.50 0.03 40;
+        --accent: 0.90 0.04 45;
+        --accent-foreground: 0.30 0.03 35;
+        --destructive: 0.55 0.20 25;
+        --destructive-foreground: 0.98 0.01 55;
+        --border: 0.88 0.02 50;
+        --input: 0.88 0.02 50;
+        --ring: 0.45 0.12 35;
+        --chart-1: 0.60 0.15 40;
+        --chart-2: 0.55 0.12 180;
+        --chart-3: 0.50 0.10 280;
+        --chart-4: 0.65 0.14 80;
+        --chart-5: 0.70 0.16 120;
+    }
+
+    .dark {
+        --background: 0.20 0.02 40;
+        --foreground: 0.95 0.01 55;
+        --card: 0.25 0.02 38;
+        --card-foreground: 0.95 0.01 55;
+        --popover: 0.22 0.02 40;
+        --popover-foreground: 0.95 0.01 55;
+        --primary: 0.75 0.10 45;
+        --primary-foreground: 0.20 0.02 40;
+        --secondary: 0.30 0.03 38;
+        --secondary-foreground: 0.95 0.01 55;
+        --muted: 0.32 0.03 40;
+        --muted-foreground: 0.65 0.03 45;
+        --accent: 0.35 0.04 42;
+        --accent-foreground: 0.95 0.01 55;
+        --destructive: 0.60 0.18 28;
+        --destructive-foreground: 0.95 0.01 55;
+        --border: 0.30 0.03 38;
+        --input: 0.30 0.03 38;
+        --ring: 0.75 0.10 45;
+        --chart-1: 0.65 0.14 42;
+        --chart-2: 0.60 0.12 185;
+        --chart-3: 0.55 0.10 285;
+        --chart-4: 0.70 0.14 85;
+        --chart-5: 0.75 0.16 125;
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-feature-settings: "rlig" 1, "calt" 1;
+    }
+    
+    /* Paper texture background */
+    .bg-paper {
+        background-color: oklch(var(--background));
+        background-image: url('/assets/generated/paper-texture.dim_2048x2048.png');
+        background-repeat: repeat;
+        background-size: 512px 512px;
+        background-blend-mode: multiply;
+    }
+    
+    .dark .bg-paper {
+        background-blend-mode: soft-light;
+        opacity: 0.98;
+    }
+}
+
+@layer components {
+    /* Markdown content styling */
+    .markdown-content {
+        @apply text-foreground leading-relaxed;
+        font-size: 1.0625rem;
+        line-height: 1.75;
+    }
+    
+    .markdown-content h1 {
+        @apply text-3xl md:text-4xl font-bold mt-8 mb-4 text-foreground tracking-tight;
+        line-height: 1.2;
+    }
+    
+    .markdown-content h2 {
+        @apply text-2xl md:text-3xl font-bold mt-8 mb-3 text-foreground tracking-tight;
+        line-height: 1.3;
+    }
+    
+    .markdown-content h3 {
+        @apply text-xl md:text-2xl font-semibold mt-6 mb-3 text-foreground;
+        line-height: 1.4;
+    }
+    
+    .markdown-content p {
+        @apply mb-4;
+        color: oklch(var(--foreground) / 0.9);
+    }
+    
+    .markdown-content strong {
+        @apply font-semibold text-foreground;
+    }
+    
+    .markdown-content em {
+        @apply italic;
+    }
+    
+    .markdown-content a {
+        @apply text-primary underline underline-offset-2 transition-colors;
+    }
+    
+    .markdown-content a:hover {
+        color: oklch(var(--primary) / 0.8);
+    }
+    
+    .markdown-content ul {
+        @apply list-disc list-outside ml-6 mb-4 space-y-2;
+    }
+    
+    .markdown-content ol {
+        @apply list-decimal list-outside ml-6 mb-4 space-y-2;
+    }
+    
+    .markdown-content li {
+        @apply pl-1;
+        color: oklch(var(--foreground) / 0.9);
+    }
+    
+    .markdown-content code {
+        @apply px-1.5 py-0.5 rounded text-sm font-mono bg-muted text-foreground;
+        border: 1px solid oklch(var(--border) / 0.5);
+    }
+    
+    .markdown-content pre {
+        @apply p-4 rounded-lg mb-4 overflow-x-auto bg-card shadow-sm;
+        border: 1px solid oklch(var(--border) / 0.6);
+    }
+    
+    .markdown-content pre code {
+        @apply p-0 bg-transparent text-sm leading-relaxed;
+        border: none;
+        font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Droid Sans Mono', 'Source Code Pro', monospace;
+    }
+    
+    .markdown-content blockquote {
+        @apply pl-4 py-2 my-4 italic text-muted-foreground rounded-r;
+        border-left: 4px solid oklch(var(--primary) / 0.4);
+        background-color: oklch(var(--muted) / 0.3);
+    }
+    
+    .markdown-content hr {
+        @apply my-8;
+        border-top: 2px solid oklch(var(--border) / 0.4);
+    }
+    
+    .markdown-content img {
+        @apply rounded-lg my-6 shadow-md max-w-full h-auto;
+    }
+    
+    /* Prose wrapper for better reading experience */
+    .prose-paper {
+        @apply max-w-3xl mx-auto;
+    }
+}
+
+@layer utilities {
+    /* Custom scrollbar */
+    .scrollbar-thin::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .scrollbar-thin::-webkit-scrollbar-track {
+        background-color: oklch(var(--muted) / 0.3);
+        @apply rounded;
+    }
+    
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+        @apply rounded;
+        background-color: oklch(var(--muted-foreground) / 0.3);
+    }
+    
+    .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+        background-color: oklch(var(--muted-foreground) / 0.5);
+    }
+}

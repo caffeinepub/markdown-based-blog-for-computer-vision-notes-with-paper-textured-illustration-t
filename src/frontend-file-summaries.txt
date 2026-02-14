@@ -1,0 +1,22 @@
+{
+  "frontend/src/App.tsx": "Main application component that sets up TanStack Router with routes for the post list page (home) and post detail page, wrapped in a shared BlogLayout component.",
+  "frontend/src/pages/PostListPage.tsx": "Home page component that displays a searchable grid of blog posts with title, date, excerpt, and tags, using client-side filtering.",
+  "frontend/src/pages/PostDetailPage.tsx": "Post detail page that loads and displays a single markdown post with full content, metadata, and a back navigation link.",
+  "frontend/src/components/layout/BlogLayout.tsx": "Shared layout component that wraps all pages with a header, main content area with paper texture background, and footer with attribution.",
+  "frontend/src/components/layout/BlogHeader.tsx": "Sticky header component displaying the blog title, icon, and decorative header illustration.",
+  "frontend/src/components/posts/PostCard.tsx": "Reusable card component for displaying post previews with title, date, excerpt, tags, and a read more link.",
+  "frontend/src/components/posts/PostSearch.tsx": "Search input component with icon that filters posts by title or tags in real-time.",
+  "frontend/src/components/common/NotFound.tsx": "Error state component displayed when a post is not found, with a friendly message and navigation back to home.",
+  "frontend/src/components/markdown/MarkdownRenderer.tsx": "Secure markdown rendering component that parses and displays markdown content with support for headings, lists, code blocks, links, and images while preventing XSS attacks.",
+  "frontend/src/features/posts/posts.types.ts": "TypeScript type definitions for post metadata, manifest structure, and full post objects.",
+  "frontend/src/features/posts/posts.staticApi.ts": "API functions for fetching the post manifest JSON and individual markdown files from static assets.",
+  "frontend/src/features/posts/usePosts.ts": "React Query hooks for loading the post manifest and individual post content with proper caching and error handling.",
+  "frontend/src/hooks/useQueries.ts": "Placeholder file for backend queries (intentionally minimal as this blog uses only static assets).",
+  "frontend/public/posts/manifest.json": "JSON manifest file that indexes all blog posts with metadata including slug, title, date, excerpt, tags, and markdown filename.",
+  "frontend/public/posts/introduction-to-computer-vision.md": "Example markdown post covering computer vision fundamentals, image processing, feature detection, and the evolution from classical methods to deep learning.",
+  "frontend/public/posts/convolutional-neural-networks.md": "Detailed markdown post explaining CNN architecture, convolution operations, pooling layers, popular architectures (LeNet, AlexNet, VGG, ResNet), and training best practices.",
+  "frontend/public/posts/object-detection-methods.md": "Comprehensive markdown post covering modern object detection methods including R-CNN family, YOLO variants, SSD, and transformer-based approaches like DETR.",
+  "frontend/public/posts/image-segmentation-techniques.md": "In-depth markdown post on image segmentation covering semantic, instance, and panoptic segmentation with architectures like U-Net, DeepLab, and Mask R-CNN.",
+  "frontend/src/index.css": "Global styles with warm paper-inspired OKLCH color palette, paper texture background, and comprehensive markdown content styling for optimal reading experience, with opacity values properly formatted for Tailwind CSS compatibility.",
+  "frontend/tailwind.config.js": "Tailwind configuration extended with warm color tokens, custom font families (Inter, Merriweather, SF Mono), paper-themed shadows, and reading-optimized typography settings."
+}

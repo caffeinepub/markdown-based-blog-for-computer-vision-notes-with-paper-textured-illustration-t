@@ -1,0 +1,115 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-a-public-blog-ui-to-present-computer-vision-notes-with-a-home-page-listing-posts-and-a-post-detail-page-for-reading-a-single-note",
+      "featureTitle": "Create a public blog UI to present computer vision notes with a home page listing posts and a post detail page for reading a single note.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/common/NotFound.tsx",
+        "frontend/src/components/layout/BlogLayout.tsx",
+        "frontend/src/components/posts/PostCard.tsx",
+        "frontend/src/pages/PostDetailPage.tsx",
+        "frontend/src/pages/PostListPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-markdown-support-for-blog-content-by-loading-posts-from-markdown-files-stored-as-static-assets-and-render-markdown-headings-lists-code-blocks-links-images-safely-in-the-post-detail-page",
+      "featureTitle": "Add Markdown support for blog content by loading posts from Markdown files stored as static assets, and render Markdown (headings, lists, code blocks, links, images) safely in the post detail page.",
+      "files": [
+        "frontend/public/posts/manifest.json",
+        "frontend/src/components/markdown/MarkdownRenderer.tsx",
+        "frontend/src/features/posts/posts.staticApi.ts",
+        "frontend/src/features/posts/posts.types.ts",
+        "frontend/src/features/posts/usePosts.ts",
+        "frontend/src/pages/PostDetailPage.tsx",
+        "frontend/src/pages/PostListPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-the-requested-visual-theme-consistently-across-all-pages-a-gentle-paper-textured-illustration-style-soft-warm-palette-subtle-grain-paper-texture-background-hand-drawn-accents-including-typography-and-spacing-that-feel-like-reading-notes",
+      "featureTitle": "Implement the requested visual theme consistently across all pages: a gentle, paper-textured illustration style (soft warm palette, subtle grain/paper texture background, hand-drawn accents), including typography and spacing that feel like reading notes.",
+      "files": [
+        "frontend/src/components/layout/BlogLayout.tsx",
+        "frontend/src/components/markdown/MarkdownRenderer.tsx",
+        "frontend/src/components/posts/PostCard.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-basic-blog-ergonomics-a-header-with-the-blog-title-optional-short-tagline-and-a-simple-client-side-filter-search-on-the-post-list-page-by-title-metadata-to-help-find-notes",
+      "featureTitle": "Add basic blog ergonomics: a header with the blog title, optional short tagline, and a simple client-side filter/search on the post list page (by title/metadata) to help find notes.",
+      "files": [
+        "frontend/src/components/layout/BlogHeader.tsx",
+        "frontend/src/components/layout/BlogLayout.tsx",
+        "frontend/src/components/posts/PostSearch.tsx",
+        "frontend/src/pages/PostListPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-the-required-generated-images-as-static-assets-and-use-them-in-the-ui-background-texture-and-a-small-hand-drawn-header-illustration-without-routing-image-delivery-through-the-backend",
+      "featureTitle": "Add the required generated images as static assets and use them in the UI (background texture and a small hand-drawn header illustration) without routing image delivery through the backend.",
+      "files": [
+        "frontend/src/components/layout/BlogHeader.tsx",
+        "frontend/src/components/posts/PostSearch.tsx",
+        "frontend/src/index.css"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

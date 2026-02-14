@@ -1,0 +1,36 @@
+{
+  "posts": [
+    {
+      "slug": "introduction-to-computer-vision",
+      "title": "Introduction to Computer Vision",
+      "date": "2026-02-10",
+      "excerpt": "An overview of computer vision fundamentals, covering image processing basics, feature detection, and the evolution from classical methods to deep learning approaches.",
+      "tags": ["basics", "introduction", "overview"],
+      "filename": "introduction-to-computer-vision.md"
+    },
+    {
+      "slug": "convolutional-neural-networks",
+      "title": "Understanding Convolutional Neural Networks",
+      "date": "2026-02-08",
+      "excerpt": "Deep dive into CNNs, exploring convolution operations, pooling layers, and how these architectures learn hierarchical features from images.",
+      "tags": ["deep-learning", "cnn", "neural-networks"],
+      "filename": "convolutional-neural-networks.md"
+    },
+    {
+      "slug": "object-detection-methods",
+      "title": "Modern Object Detection Methods",
+      "date": "2026-02-05",
+      "excerpt": "Exploring state-of-the-art object detection algorithms including YOLO, R-CNN family, and transformer-based approaches like DETR.",
+      "tags": ["object-detection", "yolo", "transformers"],
+      "filename": "object-detection-methods.md"
+    },
+    {
+      "slug": "image-segmentation-techniques",
+      "title": "Image Segmentation Techniques",
+      "date": "2026-02-01",
+      "excerpt": "Comprehensive guide to semantic and instance segmentation, covering U-Net, Mask R-CNN, and recent advances in segmentation models.",
+      "tags": ["segmentation", "u-net", "mask-rcnn"],
+      "filename": "image-segmentation-techniques.md"
+    }
+  ]
+}

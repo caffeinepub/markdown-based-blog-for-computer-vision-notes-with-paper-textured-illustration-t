@@ -1,0 +1,66 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-14T03:01:01.483Z",
+  "summary": "Implements a public CV notes blog with TanStack Router (list + detail pages), React Query-powered loading from a static posts manifest + markdown files, a warm paper-texture theme applied via CSS, and a header with illustration plus client-side search/filter. Some requested generated icon assets are not evidenced/used, and a few additions appear beyond the BuildRequest.",
+  "missing_requirements": [
+    {
+      "id": "REQ-5",
+      "requirement": "Add the required generated icon set (notebook, tag, search) as static assets under frontend/public/assets/generated and use them in the UI.",
+      "reason": "The UI uses lucide-react icons (e.g., Search, BookOpen, Calendar) and there is no evidence in the diff summary that the required generated icon set file (cv-notes-icons.dim_384x128.png) exists or is referenced/used anywhere.",
+      "evidence": [
+        "frontend/src/components/posts/PostSearch.tsx",
+        "frontend/src/components/layout/BlogHeader.tsx",
+        "frontend/src/components/posts/PostCard.tsx"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Footer attribution/link to caffeine.ai with UTM parameters.",
+      "reason": "Not requested in any requirement or acceptance criteria for the blog UI/theme/markdown/static assets.",
+      "evidence": [
+        "frontend/src/components/layout/BlogLayout.tsx"
+      ]
+    },
+    {
+      "description": "Added an empty backend canister actor (backend/main.mo) despite the blog using static assets and not requiring backend functionality.",
+      "reason": "BuildRequest focuses on a static-asset markdown blog UI and explicitly avoids external databases/auth; adding a backend actor is not requested.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    }
+  ],
+  "confidence": 0.62,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/public/posts/convolutional-neural-networks.md",
+    "frontend/public/posts/image-segmentation-techniques.md",
+    "frontend/public/posts/introduction-to-computer-vision.md",
+    "frontend/public/posts/manifest.json",
+    "frontend/public/posts/object-detection-methods.md",
+    "frontend/src/App.tsx",
+    "frontend/src/components/common/NotFound.tsx",
+    "frontend/src/components/layout/BlogHeader.tsx",
+    "frontend/src/components/layout/BlogLayout.tsx",
+    "frontend/src/components/markdown/MarkdownRenderer.tsx",
+    "frontend/src/components/posts/PostCard.tsx",
+    "frontend/src/components/posts/PostSearch.tsx",
+    "frontend/src/features/posts/posts.staticApi.ts",
+    "frontend/src/features/posts/posts.types.ts",
+    "frontend/src/features/posts/usePosts.ts",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/index.css",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/PostDetailPage.tsx",
+    "frontend/src/pages/PostListPage.tsx",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}
