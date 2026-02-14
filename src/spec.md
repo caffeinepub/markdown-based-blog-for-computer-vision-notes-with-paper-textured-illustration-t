@@ -1,13 +1,12 @@
 # Specification
 
 ## Summary
-**Goal:** Create a public, Markdown-based blog UI for computer vision notes with a gentle paper-textured illustration theme.
+**Goal:** Apply dark theme styling to all tagging UI elements (tag chips and tag filter bar) while keeping existing behavior, accessibility, and URL-based filtering unchanged.
 
 **Planned changes:**
-- Build a home page that lists blog posts (title, date, optional excerpt) and supports client-side search/filtering by title (and optionally metadata).
-- Add a post detail page that loads and renders Markdown content from static `.md` files via an index/manifest (title, date, slug, filename), with safe/sanitized rendering (no raw HTML execution).
-- Add consistent site layout ergonomics: header with blog title (and optional tagline) and clear navigation to return from a post to the list.
-- Apply the paper-textured, warm, note-like illustration theme across list and detail pages (typography, spacing, UI components).
-- Add generated static image assets under `frontend/public/assets/generated` and use them directly in the UI (background texture + header illustration).
+- Update TagFilterBar tag buttons to use dark surfaces with light/off-white text for both unselected and selected states, with clear visual distinction.
+- Update tag chips on post preview cards (PostCard) to render with dark surfaces and light/off-white text while remaining clickable.
+- Update tag chips on the post detail page to render with dark surfaces and light/off-white text while remaining clickable.
+- Ensure tag UI retains hover and focus-visible styles suitable for keyboard navigation and basic contrast expectations, without modifying shared UI components under `frontend/src/components/ui`.
 
-**User-visible outcome:** Users can browse a styled list of computer vision notes, search within them, and open a dedicated page to read each note rendered from Markdown with a consistent paper-textured theme.
+**User-visible outcome:** Tags across the post list, post cards, and post detail pages display in a dark-themed style with readable text, clear selected state in the filter bar, and unchanged tag click/filter behavior.

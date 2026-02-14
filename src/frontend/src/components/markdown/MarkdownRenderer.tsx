@@ -1,95 +1,65 @@
-import { useEffect, useRef } from 'react';
-
 interface MarkdownRendererProps {
   content: string;
 }
 
 export default function MarkdownRenderer({ content }: MarkdownRendererProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const parseMarkdown = (text: string): string => {
+    let html = text;
 
-  useEffect(() => {
-    if (!containerRef.current) return;
+    // Headers
+    html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+    html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+    html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
 
-    // Parse markdown manually for security and control
-    const html = parseMarkdown(content);
-    containerRef.current.innerHTML = html;
-  }, [content]);
+    // Bold
+    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
-  return <div ref={containerRef} className="markdown-content" />;
-}
+    // Italic
+    html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
 
-function parseMarkdown(markdown: string): string {
-  let html = markdown;
+    // Code blocks
+    html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
 
-  // Escape HTML to prevent XSS
-  html = html
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
+    // Inline code
+    html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
 
-  // Code blocks (must be before inline code)
-  html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, (_, lang, code) => {
-    const language = lang || 'plaintext';
-    return `<pre><code class="language-${language}">${code.trim()}</code></pre>`;
-  });
+    // Links
+    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
 
-  // Inline code
-  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+    // Images
+    html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" />');
 
-  // Headers
-  html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
-  html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
-  html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+    // Unordered lists
+    html = html.replace(/^\* (.+)$/gim, '<li>$1</li>');
+    html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
 
-  // Bold
-  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-  html = html.replace(/__([^_]+)__/g, '<strong>$1</strong>');
-
-  // Italic
-  html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
-  html = html.replace(/_([^_]+)_/g, '<em>$1</em>');
-
-  // Images
-  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" />');
-
-  // Links
-  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
-
-  // Unordered lists
-  html = html.replace(/^\* (.+)$/gim, '<li>$1</li>');
-  html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
-
-  // Ordered lists
-  html = html.replace(/^\d+\. (.+)$/gim, '<li>$1</li>');
-
-  // Blockquotes
-  html = html.replace(/^> (.+)$/gim, '<blockquote>$1</blockquote>');
-
-  // Horizontal rules
-  html = html.replace(/^---$/gim, '<hr />');
-
-  // Paragraphs (split by double newlines)
-  const blocks = html.split(/\n\n+/);
-  html = blocks
-    .map((block) => {
-      block = block.trim();
-      if (!block) return '';
-      // Don't wrap if already wrapped in a block element
-      if (
-        block.startsWith('<h') ||
-        block.startsWith('<ul') ||
-        block.startsWith('<ol') ||
-        block.startsWith('<pre') ||
-        block.startsWith('<blockquote') ||
-        block.startsWith('<hr')
-      ) {
-        return block;
+    // Ordered lists
+    html = html.replace(/^\d+\. (.+)$/gim, '<li>$1</li>');
+    html = html.replace(/(<li>.*<\/li>)/s, (match) => {
+      if (!match.includes('<ul>')) {
+        return '<ol>' + match + '</ol>';
       }
-      return `<p>${block}</p>`;
-    })
-    .join('\n');
+      return match;
+    });
 
-  return html;
+    // Blockquotes
+    html = html.replace(/^> (.+)$/gim, '<blockquote>$1</blockquote>');
+
+    // Horizontal rules
+    html = html.replace(/^---$/gim, '<hr />');
+
+    // Paragraphs
+    html = html.replace(/^(?!<[huo]|<pre|<blockquote|<hr)(.+)$/gim, '<p>$1</p>');
+
+    return html;
+  };
+
+  const htmlContent = parseMarkdown(content);
+
+  return (
+    <div
+      className="markdown-content"
+      dangerouslySetInnerHTML={{ __html: htmlContent }}
+    />
+  );
 }

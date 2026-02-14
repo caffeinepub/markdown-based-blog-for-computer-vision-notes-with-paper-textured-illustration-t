@@ -10,7 +10,7 @@ export default function BlogLayout() {
         <Outlet />
       </main>
 
-      <footer className="border-t border-border/40 bg-card/30 backdrop-blur-sm mt-16">
+      <footer className="border-t border-border/40 bg-card/60 backdrop-blur-md mt-16">
         <div className="container max-w-6xl mx-auto px-4 py-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
             <p>© {new Date().getFullYear()} Computer Vision Notes. All rights reserved.</p>

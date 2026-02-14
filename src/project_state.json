@@ -1,11 +1,17 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 3,
+  "projectStateVersion": 13,
   "summary": "Build a blog for computer vision notes with Markdown support and a gentle, paper-textured illustration visual style.",
-  "architectural_notes": [],
-  "known_issues": [],
+  "architectural_notes": [
+    "Homepage typography should use off-white text over a stronger (more opaque) frosted-glass background.",
+    "Post detail Markdown content area should include a black frosted-glass layer behind the text, with off-white text for readability.",
+    "Desktop background image should be scaled proportionally to fit screen width (avoid horizontal tiling).",
+    "Tagging UI (tag chips/filter controls and tags shown on posts) should use a dark theme with high-contrast readable text."
+  ],
+  "known_issues": [
+    "Desktop web view: background image tiles horizontally instead of scaling to match screen width."
+  ],
   "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- Seamless warm paper texture background with subtle grain and light speckles (paper-texture.dim_2048x2048.png)\n- Gentle hand-drawn header illustration related to studying/notes/computer vision (e.g., sketchy notebook + simple camera/diagram motifs), minimal and warm (header-illustration.dim_1600x400.png)\n- Small hand-drawn icon set: notebook, tag, search (three icons in one transparent PNG sprite or separate files) (cv-notes-icons.dim_384x128.png)",
   "existing_features": [
     {
       "id": "feature-create-a-public-blog-ui-to-present-computer-vision-notes-with-a-home-page-listing-posts-and-a-post-detail-page-for-reading-a-single-note",
@@ -46,6 +52,70 @@
         "REQ-5"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-add-a-tag-based-browsing-filtering-experience-on-the-post-list-page-so-users-can-organize-and-find-notes-by-tags-using-the-existing-tags-field-from-frontend-public-posts-manifest-json",
+      "title": "Add a tag-based browsing/filtering experience on the post list page so users can organize and find notes by tags, using the existing `tags` field from `frontend/public/posts/manifest.json`.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-tags-shown-on-post-previews-and-on-the-post-detail-page-clickable-so-that-selecting-a-tag-navigates-back-to-the-post-list-with-that-tag-filter-applied",
+      "title": "Make tags shown on post previews and on the post detail page clickable so that selecting a tag navigates back to the post list with that tag filter applied.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-support-shareable-urls-for-the-tag-filter-and-existing-search-query-so-tag-filtered-views-can-be-bookmarked-and-restored-on-page-reload",
+      "title": "Support shareable URLs for the tag filter (and existing search query) so tag-filtered views can be bookmarked and restored on page reload.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-current-paper-texture-background-image-used-by-the-bg-paper-class-with-the-user-uploaded-image-landing-background-jpg-and-ensure-it-is-served-as-a-static-asset-from-the-frontend",
+      "title": "Replace the current paper texture background image used by the `.bg-paper` class with the user-uploaded image `landing_background.jpg`, and ensure it is served as a static asset from the frontend.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-increase-the-opacity-strength-of-the-existing-frosted-glass-ui-surfaces-and-set-all-text-on-the-homepage-post-list-page-to-off-white-including-the-page-title-subtitle-search-ui-tag-filter-ui-and-post-preview-cards",
+      "title": "Increase the opacity/strength of the existing frosted-glass UI surfaces and set all text on the homepage (post list page) to off-white, including the page title/subtitle, search UI, tag filter UI, and post preview cards.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-the-post-detail-markdown-content-area-add-a-black-frosted-glass-layer-behind-the-markdown-text-and-render-all-markdown-text-in-off-white-including-headings-paragraphs-lists-blockquotes-inline-code-and-code-blocks",
+      "title": "In the post detail Markdown content area, add a black frosted-glass layer behind the Markdown text and render all Markdown text in off-white (including headings, paragraphs, lists, blockquotes, inline code, and code blocks).",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-bg-paper-background-styling-so-that-on-desktop-web-view-the-landing-background-jpg-background-image-scales-proportionally-with-its-width-matching-the-viewport-width-no-horizontal-tiling-keep-the-existing-mobile-tablet-background-behavior-unless-it-conflicts-with-this-requirement",
+      "title": "Update the `.bg-paper` background styling so that on desktop web view the `landing_background.jpg` background image scales proportionally with its width matching the viewport width (no horizontal tiling). Keep the existing mobile/tablet background behavior unless it conflicts with this requirement.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-tagging-ui-to-use-a-dark-theme-tag-chips-on-post-preview-cards-tag-chips-on-the-post-detail-page-and-the-tag-filter-bar-including-the-selected-tag-state-and-clear-filter-button-should-render-with-dark-surfaces-and-readable-light-off-white-text-while-maintaining-current-tag-click-behavior-and-accessibility",
+      "title": "Update the tagging UI to use a dark theme: tag chips on post preview cards, tag chips on the post detail page, and the tag filter bar (including the selected tag state and clear-filter button) should render with dark surfaces and readable light/off-white text while maintaining current tag click behavior and accessibility.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -64,6 +134,36 @@
     {
       "id": "AR-3",
       "summary": "Apply a gentle, paper-textured illustration visual style/theme",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Add tagging to organize notes/posts (assign tags to posts and filter/browse by tag)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Update the site background image/texture to use the user-provided image asset",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Adjust UI styling: increase frosted-glass opacity and switch homepage/Markdown text to off-white with a black frosted-glass overlay behind Markdown content",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "On desktop web, make the background image scale proportionally to match screen width (no horizontal tiling)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Style the tagging/tag filter UI using a dark theme (dark surfaces with readable light text)",
       "reqIds": [],
       "status": "pending"
     }

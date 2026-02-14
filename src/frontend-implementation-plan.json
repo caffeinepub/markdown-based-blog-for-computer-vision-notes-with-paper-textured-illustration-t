@@ -1,213 +1,37 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Markdown CV Notes Blog (Paper Texture Theme)",
+  "title": "Dark theme styling for tag chips and tag filter UI",
   "requirements": [
     {
-      "id": "REQ-1",
-      "summary": "Implement public blog UI with a post list home page and a post detail reading page, including navigation back to the list.",
+      "id": "REQ-13",
+      "summary": "Apply dark-surface, light-text styling to tag chips and the tag filter bar (including selected/clear states) while preserving existing tag navigation, URL behavior, and accessibility.",
       "acceptanceCriteria": [
-        "Home page shows a list/grid of posts with title and date (and optional excerpt).",
-        "Clicking a post navigates to a dedicated post page with the full content.",
-        "Navigation includes a clear way to return to the list view (e.g., breadcrumb/back link).",
-        "All user-facing UI text is in English."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "create",
-          "description": "Create the app shell and client-side routing for the blog, wiring routes for the post list view (home) and post detail view (by slug), plus a shared layout that includes the header and an always-available way to return to the list."
-        },
-        {
-          "path": "frontend/src/components/layout/BlogLayout.tsx",
-          "operation": "create",
-          "description": "Create a layout component that wraps all blog pages, renders the header area, and provides consistent page structure (content max-width, reading-friendly spacing) across list and detail views."
-        },
-        {
-          "path": "frontend/src/pages/PostListPage.tsx",
-          "operation": "create",
-          "description": "Create the home/list page that reads the post manifest and renders posts in a list/grid with title, date, and optional excerpt, with each item linking to the post detail route."
-        },
-        {
-          "path": "frontend/src/pages/PostDetailPage.tsx",
-          "operation": "create",
-          "description": "Create the post detail page that loads a single post by slug, displays its title/date, renders the full Markdown content, and includes a visible back link/breadcrumb to the list page."
-        },
-        {
-          "path": "frontend/src/components/posts/PostCard.tsx",
-          "operation": "create",
-          "description": "Create a reusable presentational component for a post preview card used on the list page (title/date/excerpt styling consistent with the theme)."
-        },
-        {
-          "path": "frontend/src/components/common/NotFound.tsx",
-          "operation": "create",
-          "description": "Create a small not-found/empty-state component for missing slugs or empty lists, ensuring all user-facing text is in English."
-        }
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "summary": "Load posts from static Markdown assets via a manifest and render Markdown safely on the post detail page (including code, links, and images).",
-      "acceptanceCriteria": [
-        "Posts can be authored as .md files placed in a designated static folder (e.g., a notes/ or posts/ directory under frontend public assets).",
-        "The app has an index/manifest (e.g., a JSON file or equivalent build-time list) that maps each post to its title, date, slug, and markdown filename.",
-        "Markdown rendering correctly displays headings, paragraphs, lists, fenced code blocks, inline code, links, and images referenced by relative paths to static assets.",
-        "Markdown rendering is sanitized to prevent script injection (no raw HTML execution)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/public/posts/manifest.json",
-          "operation": "create",
-          "description": "Add a static post manifest mapping each post to title, date, slug, and markdown filename; this is the single index used by the UI to list and locate Markdown files."
-        },
-        {
-          "path": "frontend/public/posts/getting-started.md",
-          "operation": "create",
-          "description": "Add an example Markdown post file under the designated static posts folder to validate headings, lists, links, code blocks, and image references."
-        },
-        {
-          "path": "frontend/src/features/posts/posts.types.ts",
-          "operation": "create",
-          "description": "Define TypeScript types for the post manifest records and loaded Markdown content to keep the UI strongly typed."
-        },
-        {
-          "path": "frontend/src/features/posts/posts.staticApi.ts",
-          "operation": "create",
-          "description": "Implement static-asset loaders that fetch the manifest JSON and fetch raw Markdown by filename from the public posts directory (no backend involvement)."
-        },
-        {
-          "path": "frontend/src/features/posts/usePosts.ts",
-          "operation": "create",
-          "description": "Create React Query hooks for (1) loading the manifest and (2) loading a post’s Markdown content by slug/filename, including basic loading/error states."
-        },
-        {
-          "path": "frontend/src/components/markdown/MarkdownRenderer.tsx",
-          "operation": "create",
-          "description": "Implement a Markdown rendering component that supports headings, lists, fenced code blocks, inline code, links, and images, and enforces safe rendering by sanitizing/disallowing raw HTML execution."
-        },
-        {
-          "path": "frontend/package.json",
-          "operation": "modify",
-          "description": "Add required Markdown rendering/sanitization libraries (and any needed routing library if not already present) so Markdown can be rendered safely with support for code blocks, links, and images."
-        },
-        {
-          "path": "frontend/src/pages/PostDetailPage.tsx",
-          "operation": "modify",
-          "description": "Wire Markdown loading and safe Markdown rendering into the post detail page using the manifest mapping and the Markdown renderer component."
-        },
-        {
-          "path": "frontend/src/pages/PostListPage.tsx",
-          "operation": "modify",
-          "description": "Load the manifest from the static posts directory and render the list based on manifest metadata (not by parsing Markdown at runtime)."
-        }
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "summary": "Apply a consistent gentle paper-textured illustration theme across all pages (warm palette, subtle texture/grain, reading-optimized typography).",
-      "acceptanceCriteria": [
-        "App background uses a subtle paper texture effect and warm neutral colors (not blue/purple-dominant).",
-        "Typography is optimized for long-form reading (comfortable line height, max content width, clear heading hierarchy).",
-        "UI components (cards, buttons, nav) match the illustration-paper theme with consistent styling.",
-        "Theme is applied across the post list and post detail views without inconsistent default styling."
+        "On the post list page, the TagFilterBar tag buttons render with a dark background and light/off-white text in both unselected and selected states, with a clear visual distinction between the two states.",
+        "On the post list page, tag chips shown inside each PostCard render with a dark background and light/off-white text and remain clickable to navigate to the tag-filtered view.",
+        "On the post detail page, tag chips render with a dark background and light/off-white text and remain clickable to navigate back to the post list with the tag filter applied.",
+        "Tag UI elements meet basic contrast expectations (light text on dark surfaces) and retain hover/focus-visible styles for keyboard navigation."
       ],
       "file_operations": [
         {
           "path": "frontend/src/index.css",
-          "operation": "create",
-          "description": "Create global styles to establish warm, paper-like CSS variables, apply a subtle paper texture background using the generated asset at frontend/public/assets/generated/paper-texture.dim_2048x2048.png, and set reading-friendly typography defaults (line height, content width, heading rhythm)."
+          "operation": "modify",
+          "description": "Add reusable dark-theme tag UI styles (e.g., component-layer utility classes for tag chips, tag filter buttons in unselected/selected states, and the clear-filter button), including hover and focus-visible treatments to maintain keyboard accessibility and adequate contrast. Keep changes scoped to tagging UI visuals only (do not switch the whole site to dark mode)."
         },
         {
-          "path": "frontend/tailwind.config.js",
+          "path": "frontend/src/components/posts/TagFilterBar.tsx",
           "operation": "modify",
-          "description": "Extend Tailwind theme tokens (colors/radius/shadows/typography usage) to align with the warm paper theme and ensure consistent styling utilities across pages."
-        },
-        {
-          "path": "frontend/src/components/layout/BlogLayout.tsx",
-          "operation": "modify",
-          "description": "Apply the themed layout styling (paper card surfaces, hand-drawn accent styling, consistent spacing) so both list and detail pages share the same visual language."
+          "description": "Update TagFilterBar to compose existing shadcn-ui Button variants with additional dark-theme classes for: (1) unselected tag buttons, (2) selected tag button state, and (3) the clear-filter button. Preserve existing onClick behavior and URL/shareable search-param behavior. Verify the component's usage instructions before implementing."
         },
         {
           "path": "frontend/src/components/posts/PostCard.tsx",
           "operation": "modify",
-          "description": "Style post preview cards to match the illustration-paper theme (warm surfaces, subtle borders/shadows, comfortable spacing) and avoid inconsistent default styling."
+          "description": "Replace the current light/accent tag chip styling (and inline color style) with the shared dark-theme tag chip classes so chips render as dark surfaces with readable light/off-white text while remaining clickable and retaining current navigation behavior."
         },
         {
-          "path": "frontend/src/components/markdown/MarkdownRenderer.tsx",
+          "path": "frontend/src/pages/PostDetailPage.tsx",
           "operation": "modify",
-          "description": "Apply reading-friendly Markdown typography styling (using Tailwind typography/prose conventions) so headings, code blocks, links, and lists fit the paper-note theme consistently."
-        }
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "summary": "Add a persistent header (blog title + optional tagline) and client-side search/filter on the post list page.",
-      "acceptanceCriteria": [
-        "Header is visible on main pages and includes the blog title.",
-        "Post list includes a search input that filters posts by title (and optionally tags).",
-        "Filtering is client-side and updates results immediately without a page reload."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/layout/BlogHeader.tsx",
-          "operation": "create",
-          "description": "Create a header component that displays the blog title and an optional short English tagline, and supports placing the small header illustration."
-        },
-        {
-          "path": "frontend/src/components/posts/PostSearch.tsx",
-          "operation": "create",
-          "description": "Create a search input component used on the post list page that filters posts client-side by title (and optionally other manifest metadata such as tags), updating results immediately."
-        },
-        {
-          "path": "frontend/src/components/layout/BlogLayout.tsx",
-          "operation": "modify",
-          "description": "Wire the BlogHeader into the shared layout so it is visible on the main pages (list and detail)."
-        },
-        {
-          "path": "frontend/src/pages/PostListPage.tsx",
-          "operation": "modify",
-          "description": "Integrate the PostSearch component and implement client-side filtering of the manifest-derived post list without page reloads."
-        }
-      ]
-    },
-    {
-      "id": "REQ-5",
-      "summary": "Add the required generated images as static assets and incorporate them into the UI (paper background, header illustration, icons) without using the backend.",
-      "acceptanceCriteria": [
-        "Generated images exist under frontend/public/assets/generated and are referenced directly by the frontend.",
-        "Paper texture is visibly applied in the layout background (not only present as an unused asset).",
-        "Header illustration is displayed in the header/hero area with appropriate sizing and responsiveness."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/public/assets/generated/paper-texture.dim_2048x2048.png",
-          "operation": "create",
-          "description": "Add the generated paper texture image as a static frontend asset at the required path so it can be referenced directly by the UI."
-        },
-        {
-          "path": "frontend/public/assets/generated/header-illustration.dim_1600x400.png",
-          "operation": "create",
-          "description": "Add the generated header illustration image as a static frontend asset at the required path so it can be rendered in the header."
-        },
-        {
-          "path": "frontend/public/assets/generated/cv-notes-icons.dim_384x128.png",
-          "operation": "create",
-          "description": "Add the generated icon set image as a static frontend asset at the required path for use alongside header/search/meta UI."
-        },
-        {
-          "path": "frontend/src/index.css",
-          "operation": "modify",
-          "description": "Reference frontend/public/assets/generated/paper-texture.dim_2048x2048.png in global styling so the paper texture is visibly applied to the app background (served as a static asset, not via backend)."
-        },
-        {
-          "path": "frontend/src/components/layout/BlogHeader.tsx",
-          "operation": "modify",
-          "description": "Render the header illustration from frontend/public/assets/generated/header-illustration.dim_1600x400.png within the header area with responsive sizing."
-        },
-        {
-          "path": "frontend/src/components/posts/PostSearch.tsx",
-          "operation": "modify",
-          "description": "Use the icon asset frontend/public/assets/generated/cv-notes-icons.dim_384x128.png to visually reinforce search/filter affordances in a lightweight, theme-consistent way."
+          "description": "Update post detail tag chips to use the shared dark-theme tag chip classes (dark surfaces, light/off-white text) while preserving existing click-to-navigate behavior back to the filtered post list and retaining hover/focus-visible styles for accessibility."
         }
       ]
     }

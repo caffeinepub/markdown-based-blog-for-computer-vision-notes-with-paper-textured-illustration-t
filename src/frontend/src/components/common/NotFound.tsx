@@ -15,7 +15,7 @@ export default function NotFound() {
           The post you're looking for doesn't exist or has been moved.
         </p>
       </div>
-      <Link to="/">
+      <Link to="/" search={{ q: '', tag: '' }}>
         <Button variant="default">Back to all notes</Button>
       </Link>
     </div>

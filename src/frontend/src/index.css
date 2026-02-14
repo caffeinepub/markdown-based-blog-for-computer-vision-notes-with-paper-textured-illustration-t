@@ -72,10 +72,19 @@
     /* Paper texture background */
     .bg-paper {
         background-color: oklch(var(--background));
-        background-image: url('/assets/generated/paper-texture.dim_2048x2048.png');
+        background-image: url('/assets/landing_background.jpg');
         background-repeat: repeat;
         background-size: 512px 512px;
         background-blend-mode: multiply;
+    }
+    
+    /* Desktop: scale background to viewport width without horizontal tiling */
+    @media (min-width: 1024px) {
+        .bg-paper {
+            background-repeat: no-repeat;
+            background-size: 100% auto;
+            background-position: top center;
+        }
     }
     
     .dark .bg-paper {
@@ -85,47 +94,86 @@
 }
 
 @layer components {
-    /* Markdown content styling */
+    /* Homepage off-white text styling */
+    .homepage-wrapper {
+        --foreground: 0.95 0.01 55;
+        --muted-foreground: 0.88 0.015 50;
+        --accent-foreground: 0.95 0.01 55;
+        --destructive: 0.65 0.18 25;
+        --card-foreground: 0.95 0.01 55;
+    }
+    
+    .homepage-wrapper h1,
+    .homepage-wrapper h2,
+    .homepage-wrapper h3,
+    .homepage-wrapper p,
+    .homepage-wrapper span,
+    .homepage-wrapper button,
+    .homepage-wrapper time,
+    .homepage-wrapper input::placeholder {
+        color: oklch(0.95 0.01 55);
+    }
+    
+    .homepage-wrapper .text-muted-foreground {
+        color: oklch(0.88 0.015 50) !important;
+    }
+    
+    /* Markdown content with black frosted glass background */
+    .markdown-container {
+        background: oklch(0.15 0.01 40 / 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        @apply rounded-xl p-8 shadow-2xl;
+    }
+    
+    /* Markdown content styling with off-white text */
     .markdown-content {
-        @apply text-foreground leading-relaxed;
+        @apply leading-relaxed;
         font-size: 1.0625rem;
         line-height: 1.75;
+        color: oklch(0.95 0.01 55);
     }
     
     .markdown-content h1 {
-        @apply text-3xl md:text-4xl font-bold mt-8 mb-4 text-foreground tracking-tight;
+        @apply text-3xl md:text-4xl font-bold mt-8 mb-4 tracking-tight;
         line-height: 1.2;
+        color: oklch(0.95 0.01 55);
     }
     
     .markdown-content h2 {
-        @apply text-2xl md:text-3xl font-bold mt-8 mb-3 text-foreground tracking-tight;
+        @apply text-2xl md:text-3xl font-bold mt-8 mb-3 tracking-tight;
         line-height: 1.3;
+        color: oklch(0.95 0.01 55);
     }
     
     .markdown-content h3 {
-        @apply text-xl md:text-2xl font-semibold mt-6 mb-3 text-foreground;
+        @apply text-xl md:text-2xl font-semibold mt-6 mb-3;
         line-height: 1.4;
+        color: oklch(0.95 0.01 55);
     }
     
     .markdown-content p {
         @apply mb-4;
-        color: oklch(var(--foreground) / 0.9);
+        color: oklch(0.92 0.01 55);
     }
     
     .markdown-content strong {
-        @apply font-semibold text-foreground;
+        @apply font-semibold;
+        color: oklch(0.95 0.01 55);
     }
     
     .markdown-content em {
         @apply italic;
+        color: oklch(0.92 0.01 55);
     }
     
     .markdown-content a {
-        @apply text-primary underline underline-offset-2 transition-colors;
+        @apply underline underline-offset-2 transition-colors;
+        color: oklch(0.85 0.08 60);
     }
     
     .markdown-content a:hover {
-        color: oklch(var(--primary) / 0.8);
+        color: oklch(0.75 0.10 60);
     }
     
     .markdown-content ul {
@@ -138,34 +186,40 @@
     
     .markdown-content li {
         @apply pl-1;
-        color: oklch(var(--foreground) / 0.9);
+        color: oklch(0.92 0.01 55);
     }
     
     .markdown-content code {
-        @apply px-1.5 py-0.5 rounded text-sm font-mono bg-muted text-foreground;
-        border: 1px solid oklch(var(--border) / 0.5);
+        @apply px-1.5 py-0.5 rounded text-sm font-mono;
+        background: oklch(0.25 0.02 40 / 0.6);
+        color: oklch(0.95 0.01 55);
+        border: 1px solid oklch(0.35 0.02 40 / 0.5);
     }
     
     .markdown-content pre {
-        @apply p-4 rounded-lg mb-4 overflow-x-auto bg-card shadow-sm;
-        border: 1px solid oklch(var(--border) / 0.6);
+        @apply p-4 rounded-lg mb-4 overflow-x-auto shadow-sm;
+        background: oklch(0.20 0.02 40 / 0.7);
+        border: 1px solid oklch(0.30 0.02 40 / 0.6);
     }
     
     .markdown-content pre code {
-        @apply p-0 bg-transparent text-sm leading-relaxed;
+        @apply p-0 text-sm leading-relaxed;
+        background: transparent;
         border: none;
+        color: oklch(0.92 0.01 55);
         font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Droid Sans Mono', 'Source Code Pro', monospace;
     }
     
     .markdown-content blockquote {
-        @apply pl-4 py-2 my-4 italic text-muted-foreground rounded-r;
-        border-left: 4px solid oklch(var(--primary) / 0.4);
-        background-color: oklch(var(--muted) / 0.3);
+        @apply pl-4 py-2 my-4 italic rounded-r;
+        border-left: 4px solid oklch(0.65 0.10 50 / 0.6);
+        background-color: oklch(0.25 0.02 40 / 0.4);
+        color: oklch(0.88 0.015 50);
     }
     
     .markdown-content hr {
         @apply my-8;
-        border-top: 2px solid oklch(var(--border) / 0.4);
+        border-top: 2px solid oklch(0.40 0.02 40 / 0.5);
     }
     
     .markdown-content img {
@@ -175,6 +229,73 @@
     /* Prose wrapper for better reading experience */
     .prose-paper {
         @apply max-w-3xl mx-auto;
+    }
+    
+    /* Dark theme tag UI components */
+    .tag-chip {
+        @apply px-2 py-0.5 text-xs font-medium rounded-full transition-colors cursor-pointer;
+        background: oklch(0.22 0.02 40 / 0.9);
+        color: oklch(0.95 0.01 55);
+        border: 1px solid oklch(0.30 0.03 38 / 0.6);
+    }
+    
+    .tag-chip:hover {
+        background: oklch(0.28 0.02 40 / 0.95);
+        border-color: oklch(0.35 0.03 38 / 0.8);
+    }
+    
+    .tag-chip:focus-visible {
+        @apply outline-none ring-2 ring-offset-2;
+        ring-color: oklch(0.75 0.10 45);
+    }
+    
+    .tag-chip-large {
+        @apply px-3 py-1 text-xs font-medium rounded-full transition-colors cursor-pointer;
+        background: oklch(0.22 0.02 40 / 0.9);
+        color: oklch(0.95 0.01 55);
+        border: 1px solid oklch(0.30 0.03 38 / 0.6);
+    }
+    
+    .tag-chip-large:hover {
+        background: oklch(0.28 0.02 40 / 0.95);
+        border-color: oklch(0.35 0.03 38 / 0.8);
+    }
+    
+    .tag-chip-large:focus-visible {
+        @apply outline-none ring-2 ring-offset-2;
+        ring-color: oklch(0.75 0.10 45);
+    }
+    
+    .tag-filter-button {
+        background: oklch(0.22 0.02 40 / 0.85);
+        color: oklch(0.95 0.01 55);
+        border: 1px solid oklch(0.30 0.03 38 / 0.6);
+    }
+    
+    .tag-filter-button:hover {
+        background: oklch(0.28 0.02 40 / 0.9);
+        border-color: oklch(0.35 0.03 38 / 0.8);
+    }
+    
+    .tag-filter-button:focus-visible {
+        @apply outline-none ring-2 ring-offset-2;
+        ring-color: oklch(0.75 0.10 45);
+    }
+    
+    .tag-filter-button-selected {
+        background: oklch(0.35 0.04 42 / 0.95);
+        color: oklch(0.98 0.01 55);
+        border: 1px solid oklch(0.45 0.05 42 / 0.8);
+    }
+    
+    .tag-filter-button-selected:hover {
+        background: oklch(0.40 0.05 42 / 1);
+        border-color: oklch(0.50 0.06 42 / 0.9);
+    }
+    
+    .tag-filter-button-selected:focus-visible {
+        @apply outline-none ring-2 ring-offset-2;
+        ring-color: oklch(0.75 0.10 45);
     }
 }
 

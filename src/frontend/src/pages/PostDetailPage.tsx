@@ -1,4 +1,4 @@
-import { useParams, Link } from '@tanstack/react-router';
+import { useParams, useNavigate } from '@tanstack/react-router';
 import { usePostContent } from '../features/posts/usePosts';
 import MarkdownRenderer from '../components/markdown/MarkdownRenderer';
 import { ArrowLeft, Calendar, Loader2 } from 'lucide-react';
@@ -8,6 +8,18 @@ import NotFound from '../components/common/NotFound';
 export default function PostDetailPage() {
   const { slug } = useParams({ from: '/post/$slug' });
   const { data: post, isLoading, error } = usePostContent(slug);
+  const navigate = useNavigate();
+
+  const handleTagClick = (tag: string) => {
+    navigate({
+      to: '/',
+      search: { q: '', tag },
+    });
+  };
+
+  const handleBackClick = () => {
+    navigate({ to: '/', search: { q: '', tag: '' } });
+  };
 
   if (isLoading) {
     return (
@@ -24,12 +36,10 @@ export default function PostDetailPage() {
   return (
     <article className="space-y-8">
       <div className="space-y-4">
-        <Link to="/">
-          <Button variant="ghost" size="sm" className="gap-2 -ml-2">
-            <ArrowLeft className="h-4 w-4" />
-            Back to all notes
-          </Button>
-        </Link>
+        <Button variant="ghost" size="sm" className="gap-2 -ml-2" onClick={handleBackClick}>
+          <ArrowLeft className="h-4 w-4" />
+          Back to all notes
+        </Button>
 
         <div className="space-y-3">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight leading-tight">
@@ -46,12 +56,13 @@ export default function PostDetailPage() {
           {post.tags && post.tags.length > 0 && (
             <div className="flex flex-wrap gap-2">
               {post.tags.map((tag) => (
-                <span
+                <button
                   key={tag}
-                  className="px-3 py-1 text-xs font-medium bg-accent text-accent-foreground rounded-full"
+                  onClick={() => handleTagClick(tag)}
+                  className="tag-chip-large"
                 >
                   {tag}
-                </span>
+                </button>
               ))}
             </div>
           )}
@@ -59,7 +70,9 @@ export default function PostDetailPage() {
       </div>
 
       <div className="prose-paper">
-        <MarkdownRenderer content={post.content} />
+        <div className="markdown-container">
+          <MarkdownRenderer content={post.content} />
+        </div>
       </div>
     </article>
   );

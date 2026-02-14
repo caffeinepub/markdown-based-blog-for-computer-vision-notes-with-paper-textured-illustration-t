@@ -11,6 +11,12 @@ const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/',
   component: PostListPage,
+  validateSearch: (search: Record<string, unknown>) => {
+    return {
+      q: (search.q as string) || '',
+      tag: (search.tag as string) || '',
+    };
+  },
 });
 
 const postRoute = createRoute({

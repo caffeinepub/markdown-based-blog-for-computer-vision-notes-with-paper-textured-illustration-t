@@ -1,121 +1,49 @@
 {
   "kind": "build_request",
-  "title": "Markdown-based blog for computer vision notes with paper-textured illustration theme",
+  "title": "Apply dark theme styling to tag chips and tag filter UI",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-1",
-      "text": "Create a public blog UI to present computer vision notes with a home page listing posts and a post detail page for reading a single note.",
+      "id": "REQ-13",
+      "text": "Update the tagging UI to use a dark theme: tag chips on post preview cards, tag chips on the post detail page, and the tag filter bar (including the selected tag state and clear-filter button) should render with dark surfaces and readable light/off-white text while maintaining current tag click behavior and accessibility.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "recent-messages-4"
         ],
         "quotes": [
-          "Create a blog to show my computer vision notes"
+          "taggings should be dark theme"
         ]
       },
       "acceptanceCriteria": [
-        "Home page shows a list/grid of posts with title and date (and optional excerpt).",
-        "Clicking a post navigates to a dedicated post page with the full content.",
-        "Navigation includes a clear way to return to the list view (e.g., breadcrumb/back link).",
-        "All user-facing UI text is in English."
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "text": "Add Markdown support for blog content by loading posts from Markdown files stored as static assets, and render Markdown (headings, lists, code blocks, links, images) safely in the post detail page.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "which can support markdown files."
-        ]
-      },
-      "acceptanceCriteria": [
-        "Posts can be authored as .md files placed in a designated static folder (e.g., a notes/ or posts/ directory under frontend public assets).",
-        "The app has an index/manifest (e.g., a JSON file or equivalent build-time list) that maps each post to its title, date, slug, and markdown filename.",
-        "Markdown rendering correctly displays headings, paragraphs, lists, fenced code blocks, inline code, links, and images referenced by relative paths to static assets.",
-        "Markdown rendering is sanitized to prevent script injection (no raw HTML execution)."
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "text": "Implement the requested visual theme consistently across all pages: a gentle, paper-textured illustration style (soft warm palette, subtle grain/paper texture background, hand-drawn accents), including typography and spacing that feel like reading notes.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "Style: gentle, paper-textured illustration style"
-        ]
-      },
-      "acceptanceCriteria": [
-        "App background uses a subtle paper texture effect and warm neutral colors (not blue/purple-dominant).",
-        "Typography is optimized for long-form reading (comfortable line height, max content width, clear heading hierarchy).",
-        "UI components (cards, buttons, nav) match the illustration-paper theme with consistent styling.",
-        "Theme is applied across the post list and post detail views without inconsistent default styling."
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "text": "Add basic blog ergonomics: a header with the blog title, optional short tagline, and a simple client-side filter/search on the post list page (by title/metadata) to help find notes.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "Create a blog to show my computer vision notes"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Header is visible on main pages and includes the blog title.",
-        "Post list includes a search input that filters posts by title (and optionally tags).",
-        "Filtering is client-side and updates results immediately without a page reload."
-      ]
-    },
-    {
-      "id": "REQ-5",
-      "text": "Add the required generated images as static assets and use them in the UI (background texture and a small hand-drawn header illustration) without routing image delivery through the backend.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "Style: gentle, paper-textured illustration style"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Generated images exist under frontend/public/assets/generated and are referenced directly by the frontend.",
-        "Paper texture is visibly applied in the layout background (not only present as an unused asset).",
-        "Header illustration is displayed in the header/hero area with appropriate sizing and responsiveness."
+        "On the post list page, the TagFilterBar tag buttons render with a dark background and light/off-white text in both unselected and selected states, with a clear visual distinction between the two states.",
+        "On the post list page, tag chips shown inside each PostCard render with a dark background and light/off-white text and remain clickable to navigate to the tag-filtered view.",
+        "On the post detail page, tag chips render with a dark background and light/off-white text and remain clickable to navigate back to the post list with the tag filter applied.",
+        "Tag UI elements meet basic contrast expectations (light text on dark surfaces) and retain hover/focus-visible styles for keyboard navigation."
       ]
     }
   ],
   "constraints": [
-    "Use React + TypeScript with Tailwind and React Query (project standard).",
-    "Do not edit files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or anything under frontend/src/components/ui; compose/wrap them instead.",
-    "No external databases or third-party auth providers; Internet Identity is the only supported auth option (do not add other auth).",
-    "Do not route generated images through the backend; serve them as static frontend assets."
+    "Do not modify files under frontend/src/components/ui (compose existing shadcn components instead of editing them).",
+    "Do not edit immutable hook/bootstrapping files: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx.",
+    "Keep the existing tag filtering logic and shareable URL behavior unchanged."
   ],
   "nonGoals": [
-    "User accounts, roles, or admin dashboards for editing posts in-app",
-    "Comments, likes, or social features",
-    "Real-time updates or chat",
-    "Integration with external content platforms (Notion, Medium, GitHub, etc.)",
-    "Full-text search indexing beyond simple client-side filtering"
+    "Adding new tag management features (creating/editing tags) or changing how tags are stored/derived.",
+    "Switching the entire site to dark mode; this change is limited to the tagging UI visuals."
   ],
   "imageRequirements": {
-    "required": [
-      "Seamless warm paper texture background with subtle grain and light speckles (paper-texture.dim_2048x2048.png)",
-      "Gentle hand-drawn header illustration related to studying/notes/computer vision (e.g., sketchy notebook + simple camera/diagram motifs), minimal and warm (header-illustration.dim_1600x400.png)",
-      "Small hand-drawn icon set: notebook, tag, search (three icons in one transparent PNG sprite or separate files) (cv-notes-icons.dim_384x128.png)"
-    ],
+    "required": [],
     "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
   }
 }
